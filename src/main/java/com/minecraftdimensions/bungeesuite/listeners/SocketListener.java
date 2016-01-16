@@ -1,8 +1,5 @@
 package com.minecraftdimensions.bungeesuite.listeners;
 
-import com.minecraftdimensions.bungeesuite.managers.PlayerManager;
-import com.minecraftdimensions.bungeesuite.managers.TeleportManager;
-import com.minecraftdimensions.bungeesuite.objects.Location;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 
@@ -37,11 +34,6 @@ public class SocketListener extends Thread {
             DataInputStream data = new DataInputStream( new ByteArrayInputStream( message ) );
 
             String task = data.readUTF();
-
-            if ( task.equals( "PlayersTeleportBackLocation" ) ) {
-                TeleportManager.setPlayersTeleportBackLocation( PlayerManager.getPlayer( data.readUTF() ), new Location( getServer( new InetSocketAddress( socket.getInetAddress(), port ) ), data.readUTF(), data.readDouble(), data.readDouble(), data.readDouble() ) );
-            }
-
 
             data.close();
             in.close();

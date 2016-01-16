@@ -1,7 +1,6 @@
 package com.minecraftdimensions.bungeesuite.objects;
 
 import com.minecraftdimensions.bungeesuite.BungeeSuite;
-import com.minecraftdimensions.bungeesuite.managers.TeleportManager;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
 
@@ -117,9 +116,5 @@ public class Location {
 
     public String serialise() {
         return server.getName() + "~!~" + world + "~!~" + x + "~!~" + y + "~!~" + z + "~!~" + yaw + "~!~" + pitch;
-    }
-
-    public void teleportPlayerToLocation( BSPlayer player ) {
-        TeleportManager.teleportPlayerToLocation( player, this );
     }
 }

@@ -24,7 +24,6 @@ public class BSPlayer {
     private boolean acceptingTeleports;
     private ArrayList<String> ignores = new ArrayList<>();
     private ArrayList<Channel> channels = new ArrayList<>();
-    private HashMap<String, ArrayList<Home>> homes = new HashMap<>();
     private Location deathBackLocation;
     private Location teleportBackLocation;
     private boolean lastBack; //true = death false = teleport
@@ -300,10 +299,6 @@ public class BSPlayer {
 
     public void setReplyPlayer( String name ) {
         replyPlayer = name;
-    }
-
-    public HashMap<String, ArrayList<Home>> getHomes() {
-        return homes;
     }
 
     public boolean firstConnect() {

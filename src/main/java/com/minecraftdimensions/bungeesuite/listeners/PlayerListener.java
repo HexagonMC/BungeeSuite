@@ -32,9 +32,6 @@ public class PlayerListener implements Listener {
             if ( MainConfig.broadcastProxyConnectionMessages ) {
                 PlayerManager.sendBroadcast( Messages.PLAYER_CONNECT_PROXY.replace( "{player}", p.getDisplayingName() ) );
             }
-            if ( MainConfig.motd ) {
-                PlayerManager.sendMessageToPlayer( e.getPlayer().getName(), Messages.MOTD.replace( "{player}", p.getDisplayingName() ) );
-            }
             p.connected();
         }
     }

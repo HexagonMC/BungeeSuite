@@ -3,8 +3,6 @@ package com.minecraftdimensions.bungeesuite.managers;
 import com.minecraftdimensions.bungeesuite.BungeeSuite;
 import com.minecraftdimensions.bungeesuite.Utilities;
 import com.minecraftdimensions.bungeesuite.configs.ChatConfig;
-import com.minecraftdimensions.bungeesuite.configs.MainConfig;
-import com.minecraftdimensions.bungeesuite.configs.SpawnConfig;
 import com.minecraftdimensions.bungeesuite.objects.BSPlayer;
 import com.minecraftdimensions.bungeesuite.objects.Messages;
 import net.md_5.bungee.api.CommandSender;
@@ -57,7 +55,6 @@ public class PlayerManager {
             BSPlayer bsplayer = new BSPlayer( player.getName(), nickname, channel, muted, chatspying, dnd, tps );
             addPlayer( bsplayer );
             IgnoresManager.LoadPlayersIgnores( bsplayer );
-            HomesManager.loadPlayersHomes( bsplayer );
         } else {
             createNewPlayer( player );
         }
@@ -67,24 +64,7 @@ public class PlayerManager {
         String ip = player.getAddress().getAddress().toString();
         SQLManager.standardQuery( "INSERT INTO BungeePlayers (playername,lastonline,ipaddress,channel) VALUES ('" + player.getName() + "', NOW(), '" + ip.substring( 1, ip.length() ) + "','" + ChatConfig.defaultChannel + "')" );
         final BSPlayer bsplayer = new BSPlayer( player.getName(), null, ChatConfig.defaultChannel, false, false, false, true );
-        if ( MainConfig.newPlayerBroadcast ) {
-            sendBroadcast( Messages.NEW_PLAYER_BROADCAST.replace( "{player}", player.getName() ) );
-        }
         addPlayer( bsplayer );
-
-        if ( SpawnConfig.newspawn && SpawnManager.NewPlayerSpawn != null ) {
-            SpawnManager.newPlayers.add( player );
-            ProxyServer.getInstance().getScheduler().schedule( BungeeSuite.instance, new Runnable() {
-
-                @Override
-                public void run() {
-                    SpawnManager.sendPlayerToNewPlayerSpawn( bsplayer, true );
-                    SpawnManager.newPlayers.remove( player );
-                }
-
-            }, 300, TimeUnit.MILLISECONDS );
-
-        }
     }
 
     private static void addPlayer( BSPlayer player ) {

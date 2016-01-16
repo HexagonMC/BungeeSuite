@@ -1,6 +1,5 @@
 package com.minecraftdimensions.bungeesuite.commands;
 
-import com.minecraftdimensions.bungeesuite.configs.Announcements;
 import com.minecraftdimensions.bungeesuite.configs.MainConfig;
 import com.minecraftdimensions.bungeesuite.objects.Messages;
 import net.md_5.bungee.api.CommandSender;
@@ -23,8 +22,7 @@ public class ReloadCommand extends Command {
         } else {
             Messages.reloadMessages();
             MainConfig.reloadConfig();
-            Announcements.reloadAnnouncements();
-            sender.sendMessage( "config.yml, announcements.yml and messages.yml reloaded!" );
+            sender.sendMessage( "config.ym and messages.yml reloaded!" );
         }
 
     }
