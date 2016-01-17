@@ -22,7 +22,7 @@ public class ReloadCommand extends Command {
         } else {
             Messages.reloadMessages();
             MainConfig.reloadConfig();
-            sender.sendMessage( "config.ym and messages.yml reloaded!" );
+            sender.sendMessage( "config.yml and messages.yml reloaded!" );
         }
 
     }
