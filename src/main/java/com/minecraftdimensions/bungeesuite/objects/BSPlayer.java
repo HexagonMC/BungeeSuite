@@ -21,23 +21,18 @@ public class BSPlayer {
     private boolean chatspying;
     private boolean dnd;
     private boolean afk;
-    private boolean acceptingTeleports;
     private ArrayList<String> ignores = new ArrayList<>();
     private ArrayList<Channel> channels = new ArrayList<>();
-    private Location deathBackLocation;
-    private Location teleportBackLocation;
-    private boolean lastBack; //true = death false = teleport
     private String replyPlayer;
     private boolean firstConnect = true;
 
-    public BSPlayer( String name, String nickname, String channel, boolean muted, boolean chatspying, boolean dnd, boolean tps ) {
+    public BSPlayer( String name, String nickname, String channel, boolean muted, boolean chatspying, boolean dnd ) {
         this.playername = name;
         this.nickname = nickname;
         this.channel = channel;
         this.muted = muted;
         this.chatspying = chatspying;
         this.dnd = dnd;
-        this.acceptingTeleports = tps;
     }
 
     public String getName() {
@@ -107,14 +102,6 @@ public class BSPlayer {
         this.dnd = dnd;
     }
 
-    public boolean acceptingTeleports() {
-        return this.acceptingTeleports;
-    }
-
-    public void setAcceptingTeleports( boolean tp ) {
-        this.acceptingTeleports = tp;
-    }
-
     public void addIgnore( String player ) {
         this.ignores.add( player );
     }
@@ -168,42 +155,8 @@ public class BSPlayer {
         return null;
     }
 
-    public void setDeathBackLocation( Location loc ) {
-        deathBackLocation = loc;
-        lastBack = true;
-    }
-
-    public boolean hasDeathBackLocation() {
-        return deathBackLocation != null;
-    }
-
-    public void setTeleportBackLocation( Location loc ) {
-        teleportBackLocation = loc;
-        lastBack = false;
-    }
-
-    public Location getLastBackLocation() {
-        if ( lastBack ) {
-            return deathBackLocation;
-        } else {
-            return teleportBackLocation;
-        }
-    }
-
     public ServerData getServerData() {
         return ChatManager.getServerData( getServer() );
-    }
-
-    public boolean hasTeleportBackLocation() {
-        return teleportBackLocation != null;
-    }
-
-    public Location getDeathBackLocation() {
-        return deathBackLocation;
-    }
-
-    public Location getTeleportBackLocation() {
-        return teleportBackLocation;
     }
 
     public boolean hasReply() {

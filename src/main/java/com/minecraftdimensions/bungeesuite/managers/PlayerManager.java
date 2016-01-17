@@ -37,9 +37,8 @@ public class PlayerManager {
         boolean muted = false;
         boolean chatspying = false;
         boolean dnd = false;
-        boolean tps = true;
         if ( playerExists( player.getName() ) ) {
-            ResultSet res = SQLManager.sqlQuery( "SELECT playername,nickname,channel,muted,chat_spying,dnd,tps FROM BungeePlayers WHERE playername = '" + player + "'" );
+            ResultSet res = SQLManager.sqlQuery( "SELECT playername,nickname,channel,muted,chat_spying,dnd FROM BungeePlayers WHERE playername = '" + player + "'" );
             while ( res.next() ) {
                 nickname = res.getString( "nickname" );
                 if ( nickname != null ) {
@@ -49,10 +48,9 @@ public class PlayerManager {
                 muted = res.getBoolean( "muted" );
                 chatspying = res.getBoolean( "chat_spying" );
                 dnd = res.getBoolean( "dnd" );
-                tps = res.getBoolean( "tps" );
             }
             res.close();
-            BSPlayer bsplayer = new BSPlayer( player.getName(), nickname, channel, muted, chatspying, dnd, tps );
+            BSPlayer bsplayer = new BSPlayer( player.getName(), nickname, channel, muted, chatspying, dnd );
             addPlayer( bsplayer );
             IgnoresManager.LoadPlayersIgnores( bsplayer );
         } else {
@@ -63,7 +61,7 @@ public class PlayerManager {
     private static void createNewPlayer( final ProxiedPlayer player ) throws SQLException {
         String ip = player.getAddress().getAddress().toString();
         SQLManager.standardQuery( "INSERT INTO BungeePlayers (playername,lastonline,ipaddress,channel) VALUES ('" + player.getName() + "', NOW(), '" + ip.substring( 1, ip.length() ) + "','" + ChatConfig.defaultChannel + "')" );
-        final BSPlayer bsplayer = new BSPlayer( player.getName(), null, ChatConfig.defaultChannel, false, false, false, true );
+        final BSPlayer bsplayer = new BSPlayer( player.getName(), null, ChatConfig.defaultChannel, false, false, false );
         addPlayer( bsplayer );
     }
 

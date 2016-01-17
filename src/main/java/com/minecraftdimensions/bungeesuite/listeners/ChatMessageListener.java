@@ -50,14 +50,6 @@ public class ChatMessageListener implements Listener {
             PrefixSuffixManager.sendPrefixAndSuffixToServer( s.getInfo() );
             return;
         }
-        if ( task.equals( "GetFactionChannels" ) ) {
-            ChatManager.sendFactionChannelsToServer( s.getInfo() );
-            return;
-        }
-        if ( task.equals( "GetTownyChannels" ) ) {
-            ChatManager.sendTownyChannelsToServer( s.getInfo() );
-            return;
-        }
         if ( task.equals( "AdminChat" ) ) {
             String message = in.readUTF();
             ChatManager.sendAdminChat( message, ( Server ) event.getSender() );
@@ -117,27 +109,11 @@ public class ChatMessageListener implements Listener {
             return;
         }
         if ( task.equals( "TogglePlayersChannel" ) ) {
-            ChatManager.togglePlayersChannel( in.readUTF(), in.readBoolean(), in.readBoolean(), in.readBoolean(), in.readBoolean() );
-            return;
-        }
-        if ( task.equals( "TogglePlayersFactionsChannel" ) ) {
-            ChatManager.togglePlayersFactionsChannel( in.readUTF(), in.readBoolean() );
-            return;
-        }
-        if ( task.equals( "ToggleToPlayersFactionChannel" ) ) {
-            ChatManager.toggleToPlayersFactionChannel( in.readUTF(), in.readUTF(), in.readBoolean() );
-            return;
-        }
-        if ( task.equals( "TogglePlayersTownyChannel" ) ) {
-            ChatManager.togglePlayersTownyChannel( in.readUTF(), in.readBoolean(), in.readBoolean() );
-            return;
-        }
-        if ( task.equals( "ToggleToPlayersTownyChannel" ) ) {
-            ChatManager.toggleToPlayersTownyChannel( in.readUTF(), in.readUTF(), in.readBoolean(), in.readBoolean() );
+            ChatManager.togglePlayersChannel( in.readUTF(), in.readBoolean() );
             return;
         }
         if ( task.equals( "TogglePlayerToChannel" ) ) {
-            ChatManager.togglePlayerToChannel( in.readUTF(), in.readUTF(), in.readBoolean(), in.readBoolean(), in.readBoolean(), in.readBoolean() );
+            ChatManager.togglePlayerToChannel( in.readUTF(), in.readUTF(), in.readBoolean() );
             return;
         }
         if ( task.equals( "GetChannelInfo" ) ) {

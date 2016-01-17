@@ -9,9 +9,6 @@ public class ServerData {
     int localDistance;
     boolean connectionMessages;
 
-    boolean usingFactionChannels;
-    boolean usingTowny;
-
 
     public ServerData( String name, String shortName, boolean force, String channel, int localDistance, boolean connectionMessages ) {
         this.serverName = name;
@@ -46,27 +43,11 @@ public class ServerData {
         return forceChannel;
     }
 
-    public boolean usingFactions() {
-        return usingFactionChannels;
-    }
-
-    public void useFactions() {
-        this.usingFactionChannels = true;
-    }
-
     public int getLocalDistance() {
         return localDistance;
     }
 
     public boolean usingConnectionMessages() {
         return connectionMessages;
-    }
-
-    public boolean usingTowny() {
-        return usingTowny;
-    }
-
-    public void useTowny() {
-        this.usingTowny = true;
     }
 }
