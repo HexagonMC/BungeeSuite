@@ -30,7 +30,7 @@ public class PlayerListener implements Listener {
         BSPlayer p = PlayerManager.getPlayer( e.getPlayer() );
         if ( p.firstConnect() ) {
             if ( MainConfig.broadcastProxyConnectionMessages ) {
-                PlayerManager.sendBroadcast( Messages.PLAYER_CONNECT_PROXY.replace( "{player}", p.getDisplayingName() ) );
+                PlayerManager.sendBroadcast( Messages.PLAYER_CONNECT_PROXY.replace( "{player}", p.getDisplayingName()));
             }
             p.connected();
         }
@@ -41,14 +41,14 @@ public class PlayerListener implements Listener {
         int dcTime = MainConfig.playerDisconnectDelay;
         final BSPlayer p = PlayerManager.getPlayer( e.getPlayer() );
         if ( dcTime > 0 ) {
-            BungeeSuite.proxy.getScheduler().schedule( BungeeSuite.instance, new Runnable() {
+            BungeeSuite.proxy.getScheduler().schedule(BungeeSuite.instance, new Runnable() {
 
                 @Override
                 public void run() {
-                    if ( PlayerManager.isPlayerOnline( p.getName() ) && ProxyServer.getInstance().getPlayer( e.getPlayer().getName() ) == null ) {
-                        if ( !PlayerManager.kickedPlayers.contains( e.getPlayer() ) ) {
-                            if ( MainConfig.broadcastProxyConnectionMessages ) {
-                                PlayerManager.sendBroadcast( Messages.PLAYER_DISCONNECT_PROXY.replace( "{player}", p.getDisplayingName() ) );
+                    if (PlayerManager.isPlayerOnline( p.getName()) && ProxyServer.getInstance().getPlayer( e.getPlayer().getName()) == null) {
+                        if (!PlayerManager.kickedPlayers.contains( e.getPlayer() ) ) {
+                            if (MainConfig.broadcastProxyConnectionMessages ) {
+                                PlayerManager.sendBroadcast( Messages.PLAYER_DISCONNECT_PROXY.replace( "{player}", p.getDisplayingName()));
                             }
                         } else {
                             PlayerManager.kickedPlayers.remove( e.getPlayer() );
@@ -59,15 +59,15 @@ public class PlayerListener implements Listener {
 
             }, MainConfig.playerDisconnectDelay, TimeUnit.SECONDS );
         } else {
-            if ( PlayerManager.isPlayerOnline( p.getName() ) && ProxyServer.getInstance().getPlayer( e.getPlayer().getName() ) == null ) {
-                if ( !PlayerManager.kickedPlayers.contains( e.getPlayer() ) ) {
-                    if ( MainConfig.broadcastProxyConnectionMessages ) {
-                        PlayerManager.sendBroadcast( Messages.PLAYER_DISCONNECT_PROXY.replace( "{player}", p.getDisplayingName() ) );
+            if (PlayerManager.isPlayerOnline( p.getName() ) && ProxyServer.getInstance().getPlayer( e.getPlayer().getName()) == null) {
+                if (!PlayerManager.kickedPlayers.contains( e.getPlayer() ) ) {
+                    if (MainConfig.broadcastProxyConnectionMessages ) {
+                        PlayerManager.sendBroadcast( Messages.PLAYER_DISCONNECT_PROXY.replace( "{player}", p.getDisplayingName()));
                     }
                 } else {
-                    PlayerManager.kickedPlayers.remove( e.getPlayer() );
+                    PlayerManager.kickedPlayers.remove( e.getPlayer());
                 }
-                PlayerManager.unloadPlayer( e.getPlayer().getName() );
+                PlayerManager.unloadPlayer( e.getPlayer().getName());
             }
         }
     }

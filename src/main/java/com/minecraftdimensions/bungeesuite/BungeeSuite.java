@@ -30,15 +30,10 @@ public class BungeeSuite extends Plugin {
     private void initialiseManagers() {
         if ( SQLManager.initialiseConnections() ) {
             DatabaseTableManager.createDefaultTables();
-            //            if ( MainConfig.UserSocketPort ) {
-            //                SocketManager.startServer();
-            //            }
             ChatManager.loadChannels();
             PrefixSuffixManager.loadPrefixes();
             PrefixSuffixManager.loadSuffixes();
-            //test
         } else {
-            //            setupSQL();
             LoggingManager.log( ChatColor.DARK_RED + "Your BungeeSuite is unable to connect to your SQL database specified in the config" );
         }
     }
