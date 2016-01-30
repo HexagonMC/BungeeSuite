@@ -40,16 +40,15 @@ public class ChatManager {
         //Load Server Channels
         for ( String servername : ProxyServer.getInstance().getServers().keySet() ) {
             loadChannel( server, servername, chan.getString( "Channels.Servers." + servername + ".Server", Messages.CHANNEL_DEFAULT_SERVER ), true, true );
-            loadChannel( server, servername + " Local", chan.getString( "Channels.Servers." + servername + ".Local", Messages.CHANNEL_DEFAULT_LOCAL ), true, true );
-            loadServerData( servername, chan.getString( "Channels.Servers." + servername + ".Shortname", servername.substring( 0, 1 ) ), chan.getBoolean( "Channels.Servers." + servername + ".ForceChannel", false ), chan.getString( "Channels.Servers." + servername + ".ForcedChannel", "Server" ), chan.getInt( "Channels.Servers." + servername + ".LocalRange", 50 ), chan.getBoolean( "Channels.Servers." + servername + ".DisableConnectionMessages", true ) );
+            loadServerData( servername, chan.getString( "Channels.Servers." + servername + ".Shortname", servername.substring( 0, 1 ) ), chan.getBoolean( "Channels.Servers." + servername + ".ForceChannel", false ), chan.getString( "Channels.Servers." + servername + ".ForcedChannel", "Server" ), chan.getBoolean( "Channels.Servers." + servername + ".DisableConnectionMessages", true ) );
         }
         //Load custom channels from db
 
         LoggingManager.log( ChatColor.GOLD + "Channels loaded - " + ChatColor.DARK_GREEN + channels.size() );
     }
 
-    private static void loadServerData( String name, String shortName, boolean forcingChannel, String forcedChannel, int localDistance, boolean connectionMessages ) {
-        ServerData d = new ServerData( name, shortName, forcingChannel, forcedChannel, localDistance, connectionMessages );
+    private static void loadServerData(String name, String shortName, boolean forcingChannel, String forcedChannel, boolean connectionMessages) {
+        ServerData d = new ServerData(name, shortName, forcingChannel, forcedChannel, connectionMessages);
         if ( serverData.get( d ) == null ) {
             serverData.put( name, d );
         }
@@ -93,7 +92,7 @@ public class ChatManager {
     public static ArrayList<Channel> getDefaultChannels( String server ) {
         ArrayList<Channel> chans = new ArrayList();
         for ( Channel c : channels ) {
-            if ( c.getName().equals( "Global" ) || c.getName().equals( "Admin" ) || c.getName().equals( server ) || c.getName().equals( server + " Local" ) ) {
+            if ( c.getName().equals( "Global" ) || c.getName().equals( "Admin" ) || c.getName().equals( server )) {
                 chans.add( c );
             }
         }
@@ -216,9 +215,6 @@ public class ChatManager {
         if ( isServerChannel( c ) ) {
             c = getChannel( sd.getServerName() );
             setPlayersChannel( p, c, false );
-        } else if ( isLocalChannel( c ) ) {
-            c = getChannel( sd.getServerName() + " Local" );
-            setPlayersChannel( p, c, false );
         } else if ( c.getName().equals( "Global" ) ) {
             return;
         } else {
@@ -228,13 +224,6 @@ public class ChatManager {
         }
 
 
-    }
-
-    private static boolean isLocalChannel( Channel c ) {
-        if ( c.isDefault() && BungeeSuite.proxy.getServers().containsKey( c.getName().split( " " )[0] ) ) {
-            return true;
-        }
-        return false;
     }
 
     private static boolean isServerChannel( Channel c ) {
@@ -416,9 +405,6 @@ public class ChatManager {
         if ( c.equals( "Global" ) ) {
             return getChannel( p.getServerData().getServerName() );
         }
-        if ( c.equals( p.getServer().getInfo().getName() ) ) {
-            return getChannel( p.getServerData().getServerName() + " Local" );
-        }
         return getChannel( "Global" );
     }
 
@@ -461,9 +447,7 @@ public class ChatManager {
 
     public static void togglePlayerToChannel( String sender, String channel, boolean bypass ) throws SQLException {
         BSPlayer p = PlayerManager.getPlayer( sender );
-        if ( channel.equalsIgnoreCase( "Local" ) ) {
-            channel = p.getServer().getInfo().getName() + " Local";
-        } else if ( channel.equalsIgnoreCase( "Server" ) ) {
+        if ( channel.equalsIgnoreCase( "Server" ) ) {
             channel = p.getServer().getInfo().getName();
         } else if ( channel.equalsIgnoreCase( "Global" ) ) {
             channel = "Global";
@@ -500,9 +484,7 @@ public class ChatManager {
             ServerData sd = serverData.get( s.getName() );
             out.writeUTF( sd.getServerName() );
             out.writeUTF( sd.getServerShortName() );
-            out.writeInt( sd.getLocalDistance() );
             out.writeBoolean( sd.usingConnectionMessages() );
-            out.writeUTF( ChatConfig.globalChatRegex );
         } catch ( IOException e ) {
             e.printStackTrace();
         }

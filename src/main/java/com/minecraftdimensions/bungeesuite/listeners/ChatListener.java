@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ChatListener implements Listener {
-    public static List<String> BlockedCommands = Arrays.asList( "/l", "/lc", "/localchannel", "/lchannel", "/channellocal", "/s", "/sc", "/serverchannel", "/schannel", "/channelserver", "/g", "/globalchat", "/globalchannel", "/gchannel" );
+    public static List<String> BlockedCommands = Arrays.asList("/s", "/sc", "/serverchannel", "/schannel", "/channelserver", "/g", "/globalchat", "/globalchannel", "/gchannel" );
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerLogin( ServerConnectedEvent e ) throws SQLException {

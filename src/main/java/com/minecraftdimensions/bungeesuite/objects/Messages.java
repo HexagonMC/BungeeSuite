@@ -17,7 +17,6 @@ public class Messages {
     // chat
     public static String CHANNEL_DEFAULT_GLOBAL = m.getString( "CHANNEL_DEFAULT_GLOBAL", "&c[{channel}]&e[{server}]{prefix}&f{player}&f{suffix}&f: &f{message}" );
     public static String CHANNEL_DEFAULT_SERVER = m.getString( "CHANNEL_DEFAULT_SERVER", "&e[{server}]{prefix}&f{player}&f{suffix}&f: &7{message}" );
-    public static String CHANNEL_DEFAULT_LOCAL = m.getString( "CHANNEL_DEFAULT_LOCAL", "&9[Local]{prefix}&f{player}&f{suffix}&f: &7{message}" );
     public static String CHANNEL_DEFAULT_ADMIN = m.getString( "CHANNEL_DEFAULT_ADMIN", "&9[Admin]{player}:{message}" );
 
     public static String PRIVATE_MESSAGE_OTHER_PLAYER = colorize( m.getString( "PRIVATE_MESSAGE_OTHER_PLAYER", "&7" + "[" + "&3" + "me" + "&7" + "->" + "&6" + "{player}" + "&7" + "] {message}" ) );
@@ -68,7 +67,6 @@ public class Messages {
         // chat
         CHANNEL_DEFAULT_GLOBAL = m.getString( "CHANNEL_DEFAULT_GLOBAL", "&c[{channel}]&e[{server}]{prefix}&f{player}&f{suffix}&f: &f{message}" );
         CHANNEL_DEFAULT_SERVER = m.getString( "CHANNEL_DEFAULT_SERVER", "&e[{server}]{prefix}&f{player}&f{suffix}&f: &7{message}" );
-        CHANNEL_DEFAULT_LOCAL = m.getString( "CHANNEL_DEFAULT_LOCAL", "&9[Local]{prefix}&f{player}&f{suffix}&f: &7{message}" );
         CHANNEL_DEFAULT_ADMIN = m.getString( "CHANNEL_DEFAULT_ADMIN", "&9[Admin]{player}:{message}" );
         PRIVATE_MESSAGE_OTHER_PLAYER = colorize( m.getString( "PRIVATE_MESSAGE_OTHER_PLAYER", "&7" + "[" + "&3" + "me" + "&7" + "->" + "&6" + "{player}" + "&7" + "] {message}" ) );
         PRIVATE_MESSAGE_RECEIVE = colorize( m.getString( "PRIVATE_MESSAGE_RECEIVE", "&7" + "[" + "&b" + "{player}" + "&7" + "->" + "&6" + "me" + "&7" + "] {message}" ) );

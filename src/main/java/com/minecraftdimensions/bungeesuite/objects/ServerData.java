@@ -6,11 +6,10 @@ public class ServerData {
     String shortName;
     boolean forceChannel;
     String forcedChannel;
-    int localDistance;
     boolean connectionMessages;
 
 
-    public ServerData( String name, String shortName, boolean force, String channel, int localDistance, boolean connectionMessages ) {
+    public ServerData( String name, String shortName, boolean force, String channel, boolean connectionMessages ) {
         this.serverName = name;
         this.shortName = shortName;
         this.forceChannel = force;
@@ -18,12 +17,9 @@ public class ServerData {
             this.forcedChannel = serverName;
         } else if ( channel.equalsIgnoreCase( "global" ) ) {
             this.forcedChannel = "Global";
-        } else if ( channel.equalsIgnoreCase( "local" ) ) {
-            this.forcedChannel = serverName + " Local";
         } else {
             this.forcedChannel = channel;
         }
-        this.localDistance = localDistance;
         this.connectionMessages = connectionMessages;
     }
 
@@ -41,10 +37,6 @@ public class ServerData {
 
     public boolean forcingChannel() {
         return forceChannel;
-    }
-
-    public int getLocalDistance() {
-        return localDistance;
     }
 
     public boolean usingConnectionMessages() {
