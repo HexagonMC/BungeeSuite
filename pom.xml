@@ -10,10 +10,6 @@
     <name>BungeeSuite</name>
     <url>http://www.spigotmc.org/resources/bungeesuite.9/</url>
 
-    <properties>
-        <build.number>${BUILD_NUMBER}</build.number>
-    </properties>
-
     <repositories>
         <repository>
             <id>sonatype-oss-public</id>
@@ -41,7 +37,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>${project.name}</finalName>
+        <finalName>${project.name}_${project.version}</finalName>
         <resources>
             <resource>
                 <directory>${project.basedir}/src/main/resources</directory>
