@@ -124,6 +124,22 @@ public class PlayerManager {
         }
     }
 
+    public static String getPlayersIP( String player ) throws SQLException {
+        BSPlayer p = getSimilarPlayer( player );
+        String ip = null;
+        if ( p == null ) {
+            ResultSet res = SQLManager.sqlQuery( "SELECT ipaddress FROM BungeePlayers WHERE playername = '" + player + "'" );
+            while ( res.next() ) {
+                ip = res.getString( "ipaddress" );
+            }
+            res.close();
+        } else {
+            ip = p.getProxiedPlayer().getAddress().getAddress().toString();
+            ip = ip.substring( 1, ip.length() );
+        }
+        return ip;
+    }
+
     public static void sendBroadcast( String message ) {
         for ( ProxiedPlayer p : proxy.getPlayers() ) {
             for ( String line : message.split( "\n" ) ) {
@@ -135,6 +151,29 @@ public class PlayerManager {
 
     public static boolean isPlayerOnline( String player ) {
         return onlinePlayers.containsKey( player );
+    }
+
+    public static boolean isSimilarPlayerOnline( String player ) {
+        return getSimilarPlayer( player ) != null;
+    }
+
+    public static ArrayList<String> getPlayersAltAccounts( String player ) throws SQLException {
+        ArrayList<String> accounts = new ArrayList<>();
+        ResultSet res = SQLManager.sqlQuery( "SELECT playername from BungeePlayers WHERE ipaddress = (SELECT ipaddress FROM BungeePlayers WHERE playername = '" + player + "')" );
+        while ( res.next() ) {
+            accounts.add( res.getString( "playername" ) );
+        }
+        return accounts;
+    }
+
+    public static ArrayList<String> getPlayersAltAccountsByIP( String ip ) throws SQLException {
+        ArrayList<String> accounts = new ArrayList<>();
+        ResultSet res = SQLManager.sqlQuery( "SELECT playername from BungeePlayers WHERE ipaddress = '" + ip + "'" );
+        while ( res.next() ) {
+            accounts.add( res.getString( "playername" ) );
+        }
+        res.close();
+        return accounts;
     }
 
     public static BSPlayer getPlayer( CommandSender sender ) {
